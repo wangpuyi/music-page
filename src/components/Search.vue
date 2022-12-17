@@ -7,16 +7,16 @@ export default {
     return {
       msg: 'Music',
       store,
-      mysong:''
+      mysonglist:''
 
     }
   },
   methods:{
     send_search(){
-      w
+      
       this.$router.push('/B')
       
-      this.$store.commit('changesong',this.mysong)
+      this.$store.commit('changesong',this.mysonglist)
     
   
 }}}
@@ -24,9 +24,9 @@ export default {
 
 <template>
 <div class="bottom"> 
-  <input v-model="mysong" >
-  <p>{{this.$store.state.song_to_check}}</p>
-  <button @click="send_search "  >搜索</button>
+  <input v-model="mysonglist" >
+
+  <button @click="send_search " >搜索</button>
 
 
 

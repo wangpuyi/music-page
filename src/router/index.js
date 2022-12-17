@@ -18,7 +18,7 @@ const routes = [
     },
     {
         path:"/B",
-        component:()=>import('../views/B')
+        component:()=>import('../views/Ge-danneibu')
     },
     {
         path:"/C",
@@ -27,6 +27,10 @@ const routes = [
     {
         path:"/Ge-dan",
         component:()=>import('../views/Ge-dan')
+    },
+    {
+        path:"/Ge-qujiemian",
+        component:()=>import('../views/Ge-qujiemian')
     },
     
 
