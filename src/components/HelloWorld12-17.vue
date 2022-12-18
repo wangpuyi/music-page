@@ -302,77 +302,80 @@
       <button @click="showModal=true" class="btn">{{ pick_tag }}</button>
   </div> -->
   <!-- 按钮 end -->
-  <div class="carousel" style="width:1000px;" auto>
-    <el-carousel :interval="4000" type="card" height="200px">
-      <el-carousel-item v-for="img in images" :key="img.id">
-        <div class="rowing_image"><el-image style="width: 100%; height: 200px" :src="img.goodsImage"
-            :fit="fit"></el-image></div>
-      </el-carousel-item>
-    </el-carousel>
-  </div>
+<!-- 图片走马灯 -->
+<div class="carousel" style="width:1000px;" auto>
+  <el-carousel :interval="4000" type="card" height="200px">
+    <el-carousel-item v-for="img in images" :key="img.id">
+      <div class="rowing_image"><el-image style="width: 100%; height: 200px" :src="img.Image" ></el-image></div>
+    </el-carousel-item>
+  </el-carousel>
+</div>
+<!-- 图片走马灯 end -->
 
-  <div class='listCard' style="width:1000px; hight: 1500px;">
-    <div class='listCardItem'>
-      <div class="image">
-        <img class="img" src='http://p4.music.126.net/KuhEhth3Dzwu1yYa--Nx6w==/109951167898543099.jpg?param=200y200' />
+<!-- 歌单列表 -->
+    <div class = 'listCard' style="width:1000px; hight: 1500px;">
+      <div class = 'listCardItem'>
+        <div class="image">
+          <img class="img" :src='ListImage[0]' />
+        </div>
+        <div class="title">{{name[0]}}</div>
       </div>
-      <div class="title">宝藏雷达 | 惊喜总出现于不经意间</div>
-    </div>
-    <div class='listCardItem'>
-      <div class="image">
-        <img class="img" src='http://p4.music.126.net/KuhEhth3Dzwu1yYa--Nx6w==/109951167898543099.jpg?param=200y200' />
+      <div class = 'listCardItem'>
+        <div class="image">
+          <img class="img" :src='ListImage[1]' />
+        </div>
+        <div class="title">{{name[1]}}</div>
       </div>
-      <div class="title">宝藏雷达 | 惊喜总出现于不经意间</div>
-    </div>
-    <div class='listCardItem'>
-      <div class="image">
-        <img class="img" src='http://p4.music.126.net/KuhEhth3Dzwu1yYa--Nx6w==/109951167898543099.jpg?param=200y200' />
+      <div class = 'listCardItem'>
+        <div class="image">
+          <img class="img" :src='ListImage[2]' />
+        </div>
+        <div class="title">{{name[2]}}</div>
       </div>
-      <div class="title">宝藏雷达 | 惊喜总出现于不经意间</div>
-    </div>
-    <div class='listCardItem'>
-      <div class="image">
-        <img class="img" src='http://p4.music.126.net/KuhEhth3Dzwu1yYa--Nx6w==/109951167898543099.jpg?param=200y200' />
+      <div class = 'listCardItem'>
+        <div class="image">
+          <img class="img" :src='ListImage[3]' />
+        </div>
+        <div class="title">{{name[3]}}</div>
       </div>
-      <div class="title">宝藏雷达 | 惊喜总出现于不经意间</div>
-    </div>
-    <div class='listCardItem'>
-      <div class="image">
-        <img class="img" src='http://p4.music.126.net/KuhEhth3Dzwu1yYa--Nx6w==/109951167898543099.jpg?param=200y200' />
+      <div class = 'listCardItem'>
+        <div class="image">
+          <img class="img" :src='ListImage[4]' />
+        </div>
+        <div class="title">{{name[4]}}</div>
       </div>
-      <div class="title">宝藏雷达 | 惊喜总出现于不经意间</div>
-    </div>
-    <div class='listCardItem'>
-      <div class="image">
-        <img class="img" src='http://p4.music.126.net/KuhEhth3Dzwu1yYa--Nx6w==/109951167898543099.jpg?param=200y200' />
+      <div class = 'listCardItem'>
+        <div class="image">
+          <img class="img" :src='ListImage[5]' />
+        </div>
+        <div class="title">{{name[5]}}</div>
       </div>
-      <div class="title">宝藏雷达 | 惊喜总出现于不经意间</div>
-    </div>
-    <div class='listCardItem'>
-      <div class="image">
-        <img class="img" src='http://p4.music.126.net/KuhEhth3Dzwu1yYa--Nx6w==/109951167898543099.jpg?param=200y200' />
+      <div class = 'listCardItem'>
+        <div class="image">
+          <img class="img" :src='ListImage[6]' />
+        </div>
+        <div class="title">{{name[6]}}</div>
       </div>
-      <div class="title">宝藏雷达 | 惊喜总出现于不经意间</div>
-    </div>
-    <div class='listCardItem'>
-      <div class="image">
-        <img class="img" src='http://p4.music.126.net/KuhEhth3Dzwu1yYa--Nx6w==/109951167898543099.jpg?param=200y200' />
+      <div class = 'listCardItem'>
+        <div class="image">
+          <img class="img" :src='ListImage[7]' />
+        </div>
+        <div class="title">{{name[7]}}</div>
       </div>
-      <div class="title">宝藏雷达 | 惊喜总出现于不经意间</div>
-    </div>
-    <div class='listCardItem'>
-      <div class="image">
-        <img class="img" src='http://p4.music.126.net/KuhEhth3Dzwu1yYa--Nx6w==/109951167898543099.jpg?param=200y200' />
+      <div class = 'listCardItem'>
+        <div class="image">
+          <img class="img" :src='ListImage[8]' />
+        </div>
+        <div class="title">{{name[8]}}</div>
       </div>
-      <div class="title">宝藏雷达 | 惊喜总出现于不经意间</div>
-    </div>
-    <div class='listCardItem'>
-      <div class="image">
-        <img class="img" src='http://p4.music.126.net/KuhEhth3Dzwu1yYa--Nx6w==/109951167898543099.jpg?param=200y200' />
+      <div class = 'listCardItem'>
+        <div class="image">
+          <img class="img" :src='ListImage[9]' />
+        </div>
+        <div class="title">{{name[9]}}</div>
       </div>
-      <div class="title">宝藏雷达 | 惊喜总出现于不经意间</div>
     </div>
-  </div>
+<!-- 歌单列表 end-->
 </template>
 
 <script>
@@ -380,20 +383,44 @@
 export default {
   data() {
     return {
-      showModal: false,
-      pick_tag: "华语",
-      images: [{ id: 1, goodsImage: 'http://p1.music.126.net/es5iS_FTfgKBngEGpswzUw==/109951168153707267.jpg ', goodsCategoryName: '家政服务' },
-      { id: 2, goodsImage: 'http://p1.music.126.net/XkhUtVDdGLcg5KpXa_Vw-w==/109951168153726125.jpg', goodsCategoryName: '家政服务' },
-      { id: 3, goodsImage: 'http://p1.music.126.net/e1eNRZLZEgMzG0GxPFtTiA==/109951168153738247.jpg', goodsCategoryName: '家政服务' },
-      { id: 4, goodsImage: 'http://p1.music.126.net/Qp-6Lgrkg8KkaBeaSjgq4g==/109951168153713033.jpg', goodsCategoryName: '家政服务' },
-      { id: 5, goodsImage: 'http://p1.music.126.net/JVeTK-MnkeLj3b3F8u49Pw==/109951168153726257.jpg', goodsCategoryName: '家政服务' },
-      { id: 6, goodsImage: 'http://p1.music.126.net/jLT0ETZuxg17L1NnVbwnJA==/109951168153727929.jpg', goodsCategoryName: '家政服务' }]
+      // showModal: false,
+      // pick_tag: "华语",
+      images: [{id: 1, Image: 'http://p1.music.126.net/es5iS_FTfgKBngEGpswzUw==/109951168153707267.jpg '},
+        {id: 2, Image: 'http://p1.music.126.net/XkhUtVDdGLcg5KpXa_Vw-w==/109951168153726125.jpg'}, 
+        {id: 3, Image: 'http://p1.music.126.net/e1eNRZLZEgMzG0GxPFtTiA==/109951168153738247.jpg'},
+        {id: 4, Image: 'http://p1.music.126.net/Qp-6Lgrkg8KkaBeaSjgq4g==/109951168153713033.jpg'},
+        {id: 5, Image: 'http://p1.music.126.net/JVeTK-MnkeLj3b3F8u49Pw==/109951168153726257.jpg'},
+        {id: 6, Image: 'http://p1.music.126.net/jLT0ETZuxg17L1NnVbwnJA==/109951168153727929.jpg'}],
+      ListImage: [],
+      name : [],
+      ids : []
     };
+  },
+  methods: {
+    initData () {
+      const payload = {'label' : '华语'}
+      this.$axios.get('http://127.0.0.1:5000/data',{params:payload}).then(res => {
+        // this.datetime = res.data.listid
+        console.log(res.data)
+        let i = 0;
+        for(; i < 10; i++){
+          console.log(res.data[i])
+          this.name.push(res.data[i].name)
+          this.ListImage.push(res.data[i].listimage)
+          this.ids.push(res.data[i].listid)
+        }
+          
+      })
+    }
+  },
+  mounted () {
+    this.initData()
   }
 };
 </script>
 
 <style scoped>
+
 /* wpy */
 .listCard {
   display: flex;
@@ -404,7 +431,6 @@ export default {
   box-sizing: border-box;
   display: block;
 }
-
 .listCardItem {
   width: 18.4%;
   margin: 0 2% 20px 0;
@@ -413,18 +439,15 @@ export default {
   /* display: table-cell; */
   float: left;
 }
-
 .listCardItem:nth-child(5n) {
   margin-right: 0;
 }
-
 .image {
   width: 100%;
   padding-bottom: 100%;
   height: 0;
   position: relative;
 }
-
 .image::after {
   content: "";
   width: 100%;
@@ -437,16 +460,14 @@ export default {
   border-radius: 10px;
   z-index: -1;
 }
-
 .image img {
   width: 100%;
   border-radius: 10px;
 }
-
 .title {
   margin-top: 8px;
   padding: 0 2px;
-  font-size: 12px;
+  font-size: 14px;
   color: black;
   line-height: 17px;
   /* 两行溢出 */
@@ -458,18 +479,17 @@ export default {
   line-clamp: 2;
   -webkit-box-orient: vertical;
 }
-
 /* wpy end */
 
 /* wpy */
-.rowing_image>el-image {
-  /* overflow-clip-margin: content-box;
+.rowing_image>el-image{
+    /* overflow-clip-margin: content-box;
     overflow: clip; */
-  /* height: 100%; */
-  display: block;
-  height: 100%;
-  border-radius: 10px;
-
+    /* height: 100%; */
+    display: block;
+    height: 100%;
+    border-radius: 10px;
+    
   background-size: contain;
   /* 图片比例不变，将元素铺满 */
   background-size: cover;
@@ -477,7 +497,6 @@ export default {
   background-size: 100% 100%;
 
 }
-
 /* wpy end */
 
 .mask {
@@ -490,18 +509,16 @@ export default {
   height: 100%;
   z-index: 1
 }
-
 .pop {
   background-color: #fff;
-
+ 
   position: fixed;
   top: 200px;
   left: 50px;
   width: 1000px;
-  height: 1000px;
+  height:1000px;
   z-index: 9999
 }
-
 .btn {
   background-color: #fff;
   border-radius: 4px;
@@ -509,7 +526,7 @@ export default {
   padding: 20px 24px;
   position: fixed;
   top: 300px;
-  left: 50px;
+  left:50px;
   z-index: 999;
 }
 </style>

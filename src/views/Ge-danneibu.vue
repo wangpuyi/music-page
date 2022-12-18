@@ -23,14 +23,19 @@
     <div>
         <!-- 表格 -->
         <el-table :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)" style="width: 100%" @row-click="openDialog">
-            <el-table-column prop="date" label="日期" width="180">
-                
+           
+   
+            <el-table-column prop="name" label="标题" width="280">
             </el-table-column>
-            <el-table-column prop="name" label="姓名" width="180">
+            <el-table-column prop="studentId" label="歌手" width="180">
             </el-table-column>
-            <el-table-column prop="address" label="地址">
+            <el-table-column prop="address" label="专辑" width="180" >
+            </el-table-column>
+            <el-table-column prop="address" label="时长" width="180">
             </el-table-column>
         </el-table>
+
+
         <!-- 分页器 -->
         <div class="block" style="margin-top:15px;">
             <el-pagination align='center' @size-change="handleSizeChange" @current-change="handleCurrentChange" 
@@ -49,43 +54,21 @@
         export default {
             data() {
                 return {
-                  tableData: [
-                        {
-                            date: this.$store.state.song_to_check,
-                            name: "第一页",
-                            address: "上海市普陀区金沙江路 1518 弄"
-                        },
-                        {
-                            date: "2016-05-04",
-                            name: "第二页",
-                            address: "上海市普陀区金沙江路 1517 弄"
-                        },
-                        {
-                            date: "2016-05-01",
-                            name: "第三页",
-                            address: "上海市普陀区金沙江路 1519 弄"
-                        },
-                        {
-                            date: "2016-05-03",
-                            name: "第四页",
-                            address: "上海市普陀区金沙江路 1516 弄"
-                        },
-                        {
-                            date: "2016-05-01",
-                            name: "第五页",
-                            address: "上海市普陀区金沙江路 1519 弄"
-                        },
-                        {
-                            date: "2016-05-03",
-                            name: "第六页",
-                            address: "上海市普陀区金沙江路 1516 弄"
-                        },
-                    ],
+                    
+   
+                  tableData:[],
                     currentPage: 1, // 当前页码
                     total: 20, // 总条数
                     pageSize: 5 // 每页的数据条数
                 };
             },
+
+            mounted(){
+                this.tableData=this.$store.state.songlist
+
+                
+            },
+
             methods: {
                 //每页条数改变时触发 选择一页显示多少行
                 handleSizeChange(val) {
@@ -98,9 +81,12 @@
                     console.log(`当前页: ${val}`);
                     this.currentPage = val;
                 },
-                openDialog(row) {
-      this.$router.push({path: '/Ge-qujiemian'}),
-      console.log(row)
+
+            
+        openDialog(row) {
+        this.$router.push({path: '/Ge-qujiemian'}),
+        this.$store.commit('changesong_ID',row.currentsong_ID)
+        console.log( (this.$store.state.currentsong_ID))
   }
             }
         };
