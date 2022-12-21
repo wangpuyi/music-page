@@ -1,31 +1,30 @@
 <template>
 
-  <div class="playing-song-detail" ref="playingSongDetail">
+    <div class="playing-song-detail" ref="playingSongDetail">
+      <button class="icon-down-arrow" @click="closeSongDetail"> 返回歌单</button>
+      <el-container style="height: 1000px; border: 1px solid #eee">
+            
+        <div @click="playmusic" :class="{ 'rotate360': showAnimate }" class="icon-iconfontshuaxin">
+        </div>
+          <div class="lyric">
+            <h2>歌名</h2>
+            <h3>作者</h3>
+            <ul ref="lyricUL">
+              <li v-for="(item, i) in lyricsObjArr" :style="{ color: lyricIndex === i ? 'skyblue' : '#ded9d9' }" :key="item.uid"
+                :data-index='i' ref="lyric">{{ item.lyric }}</li>
+            </ul>
+          </div>
+      
+      <div class="bottom">
+        <div class="play-tab">
+          <audio src='https://music.163.com/song/media/outer/url?id=562598065.mp3' @timeupdate="updateTime" ref="audio"
+            controls="controls" ontimeupdate></audio>
+        </div>
+      </div>
 
-    <button class="icon-down-arrow" @click="closeSongDetail"> 返回歌单</button>
-
-    <div @click="playmusic" :class="{ 'rotate360': showAnimate }" class="icon-iconfontshuaxin">
+      </el-container>>
 
     </div>
-
-    <div class="play-tab">
-      <audio src='https://music.163.com/song/media/outer/url?id=562598065.mp3' @timeupdate="updateTime" ref="audio"
-        controls="controls" ontimeupdate></audio>
-
-
-      <ul ref="lyricUL">
-        <li v-for="(item, i) in lyricsObjArr" :style="{ color: lyricIndex === i ? 'skyblue' : '#ded9d9' }" :key="item.uid"
-          :data-index='i' ref="lyric">{{ item.lyric }}</li>
-      </ul>
-
-    </div>
-
-
-
-
-  </div>
-
-
 </template>
 
 
@@ -56,6 +55,26 @@ export default {
         },
         {
           time: 8,
+          lyric: 'WDNMD非得已',
+          uid: '233332'
+        },
+        {
+          time: 10,
+          lyric: '爱上你是我情非得已',
+          uid: '234432'
+        },
+        {
+          time: 12,
+          lyric: 'WDNMD非得已',
+          uid: '233332'
+        },
+        {
+          time: 14,
+          lyric: '爱上你是我情非得已',
+          uid: '234432'
+        },
+        {
+          time: 16,
           lyric: 'WDNMD非得已',
           uid: '233332'
         }
@@ -128,9 +147,8 @@ export default {
 
 <style lang="less" scoped>
 .play-tab {
-  position: absolute;
-  left: 170px;
-  top: 550px;
+  position: relative;
+  left: 45%;
 }
 
 
@@ -141,7 +159,7 @@ export default {
   right: 0;
   width: 100%;
   height: calc(100vh);
-  background: rgb(144, 57, 57);
+  background: rgb(133, 76, 72);
   z-index: 99;
   overflow-y: scroll;
 
@@ -150,9 +168,10 @@ export default {
     position: fixed;
     top: 10px;
     left: 20px;
-    font-size: 32px;
+    font-size: 16px;
     font-weight: 700;
-
+    background-color: rgb(237, 240, 27);
+    color: rgb(0, 0, 0);
   }
 
   .disc {
@@ -195,6 +214,19 @@ export default {
 
 
   }
-
+  
+  .lyric {
+    position: relative;
+    margin-top: 10%;
+    margin-left: 20%;
+    width: 500px;
+    height: 800px;
+  }
+  .bottom {
+    position: fixed;
+    background-color: #fff;
+    width: 100%;
+    bottom: 0px;
+  }
 }
 </style>
