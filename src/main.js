@@ -14,15 +14,15 @@ const store = createStore({
       count: 0,
       song_to_check: "sdsd",
       update: 0,
-      picked_tag: "00",
+      picked_tag: "华语",
       currentsong_url:
         "https://music.163.com/song/media/outer/url?id=562598065.mp3",
       currentsong_ID: 0,
       songlist: [
         {
-          name: "666",
-          studentId: "2020111601",
-          pro: "英语专业",
+          title: "666",
+          singer: "2020111601",
+          album: "英语专业",
           class: "1班级",
           tableOption: [
             { score: "86" },
@@ -36,9 +36,9 @@ const store = createStore({
           currentsong_ID: 0,
         },
         {
-          name: "88",
-          studentId: "2020111602",
-          pro: "英语专业",
+          title: "88",
+          singer: "2020111602",
+          album: "英语专业",
           class: "1班级",
           tableOption: [
             { score: "91" },
@@ -74,7 +74,6 @@ const app = createApp(App)
   .use(Vuex)
   .use(ElementPlus)
   .use(router)
-  .use(store)
-  .mount("#app");
+  .use(store);
 app.config.globalProperties.$axios = axios;
 app.mount("#app");

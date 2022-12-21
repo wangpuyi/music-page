@@ -18,7 +18,7 @@ const routes = [
     },
     {
         path:"/B",
-        component:()=>import('../views/Ge-danneibu')
+        component:()=>import('../views//Ge-danneibu')
     },
     {
         path:"/C",
@@ -32,6 +32,7 @@ const routes = [
         path:"/Ge-qujiemian",
         component:()=>import('../views/Ge-qujiemian')
     },
+
     
 
 ]

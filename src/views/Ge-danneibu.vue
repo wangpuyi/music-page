@@ -6,32 +6,48 @@
 
   
 <div>
+  <h1>{{ name }}</h1>
 <div class="wrapper">
     <div class="f1"><el-card class="box-card">
-  <div v-for="o in 4" :key="o" class="text item">
-    {{'列表内容 ' + o }}
+  <div  class="text item">
+    创建者：
   </div>
-
+  <div  class="text item">
+    标签：
+  </div>
+  <div  class="text item">
+    播放量：
+  </div>
+  <div  class="text item">
+    简介：
+  </div>
 </el-card></div>
     <div class="f2"><el-card class="box-card1">
-  <div v-for="o in 4" :key="o" class="text item">
-    {{'列表内容 ' + o }}
+  <div  class="text item">
+    {{author}}
+  </div>
+  <div  class="text item">
+    {{label}}
+  </div>
+  <div  class="text item">
+    {{views}}
+  </div>
+  <div  class="text item">
+    {{des}}
   </div>
 </el-card></div>
 </div></div>
 
     <div>
         <!-- 表格 -->
-        <el-table :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)" style="width: 100%" @row-click="openDialog">
+        <el-table :data="SongsData.slice((currentPage-1)*pageSize,currentPage*pageSize)" style="width: 100%" @row-click="openDialog">
            
    
-            <el-table-column prop="name" label="标题" width="280">
+            <el-table-column prop="title" label="标题" width="280">
             </el-table-column>
-            <el-table-column prop="studentId" label="歌手" width="180">
+            <el-table-column prop="singer" label="歌手" width="180">
             </el-table-column>
-            <el-table-column prop="address" label="专辑" width="180" >
-            </el-table-column>
-            <el-table-column prop="address" label="时长" width="180">
+            <el-table-column prop="album" label="专辑" width="180" >
             </el-table-column>
         </el-table>
 
@@ -43,7 +59,7 @@
             :page-sizes="[1,5,10,20]" 
             :page-size="pageSize" 
             layout="total, sizes, prev, pager, next, jumper" 
-            :total="tableData.length">
+            :total="SongsData.length">
             </el-pagination>
         </div>
     </div>
@@ -56,20 +72,44 @@
                 return {
                     
    
-                  tableData:[],
+                  SongsData:[],
                     currentPage: 1, // 当前页码
                     total: 20, // 总条数
-                    pageSize: 5 // 每页的数据条数
+                    pageSize: 5, // 每页的数据条数
+                    name:'',
+            author:'',
+            songids:'',
+            views:'',
+            des:'',
+            label:''
                 };
             },
 
             mounted(){
-                this.tableData=this.$store.state.songlist
+                this.initData()
 
-                
             },
 
             methods: {
+              initData () {
+      //id=(this.$route.query.listid)
+      this.$axios.get('http://127.0.0.1:5000/list1/'+this.$route.query.listid).then(res => {
+        // this.datetime = res.data.listid
+        //console.log(res.data)
+        //let i = 0;
+          console.log(res.data)
+          this.label = res.data.label
+          this.name=(res.data.name)
+          this.author=(res.data.author)
+          //const payload = {'ids':res.data.ids}
+          this.SongsData = res.data.SongsData
+          this.views=(res.data.views)
+          this.des=(res.data.description)
+
+          
+      })
+      
+    } ,
                 //每页条数改变时触发 选择一页显示多少行
                 handleSizeChange(val) {
                     console.log(`每页 ${val} 条`);
@@ -88,7 +128,8 @@
         this.$store.commit('changesong_ID',row.currentsong_ID)
         console.log( (this.$store.state.currentsong_ID))
   }
-            }
+    
+    }
         };
 </script>
 
@@ -104,7 +145,7 @@
   }
 
   .box-card {
-    width: 600px;
+    width: 100px;
   }
   
   .box-card1 {
@@ -120,7 +161,7 @@
 }
 
 .f1 {
-    width: 600px;
+    width: 100px;
     border: 1px solid #F00;
     float: left;
 }
