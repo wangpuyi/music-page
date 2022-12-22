@@ -1,7 +1,7 @@
 <template>
     <div id="myChart1" :style="{width: '1200px', height: '800px'}"></div>
     <div id="myChart2" :style="{width: '1200px', height: '800px'}"></div>
-</template>
+</template> 
 <script>
 // 引入基本模板
 let echarts = require('echarts/lib/echarts')
