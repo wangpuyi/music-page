@@ -3,7 +3,7 @@ import pymysql,random
 from flask_cors import CORS
 import json
 
-from elasticsearch import Elasticsearch
+from elasticsearch7 import Elasticsearch
 es = Elasticsearch()
 
 app = Flask(__name__)
@@ -61,6 +61,15 @@ def querySongs(SongIds):
         temp = querySong(id)
         if (temp!=None):
             result.append(temp)
+    return result
+
+#3.2	按歌曲id获取歌曲信息
+def querydetailSong(songId):
+    conn.ping(reconnect=True)
+    cursor = conn.cursor()
+    cursor.execute('SELECT songid,title,singer,album,image,lyric FROM songlist WHERE songid LIKE %s',songId)
+    result = cursor.fetchone()
+    #cursor.close()
     return result
 
 #4.	按歌曲名搜索
@@ -207,6 +216,13 @@ def hellosongs(ids):
 def hellosong(id):
     data = querySong(id)
     return jsonify(data)
+
+
+@app.route("/querysong/<int:id>")
+def hellodesong(id):
+    data = querydetailSong(id)
+    return jsonify(data)
+
 
 
 @app.route("/zhuye",methods=['GET','POST'])

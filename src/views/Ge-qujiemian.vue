@@ -2,13 +2,15 @@
 
     <div class="playing-song-detail" ref="playingSongDetail">
       <button class="icon-down-arrow" @click="closeSongDetail"> 返回歌单</button>
+      <br><br><br><br>{{this.mscurl}}
+    
       <el-container style="height: 1000px; border: 1px solid #eee">
             
         <div @click="playmusic" :class="{ 'rotate360': showAnimate }" class="icon-iconfontshuaxin">
         </div>
           <div class="lyric">
-            <h2>歌名</h2>
-            <h3>作者</h3>
+            <h2>{{this.title}}</h2>
+            <h3>{{this.singer}}</h3>
             <ul ref="lyricUL">
               <li v-for="(item, i) in lyricsObjArr" :style="{ color: lyricIndex === i ? 'skyblue' : '#ded9d9' }" :key="item.uid"
                 :data-index='i' ref="lyric">{{ item.lyric }}</li>
@@ -17,7 +19,7 @@
       
       <div class="bottom">
         <div class="play-tab">
-          <audio src='https://music.163.com/song/media/outer/url?id=562598065.mp3' @timeupdate="updateTime" ref="audio"
+          <audio src={{this.mscurl}} @timeupdate="updateTime" ref="audio"
             controls="controls" ontimeupdate></audio>
         </div>
       </div>
@@ -34,6 +36,12 @@ export default {
 
   data() {
     return {
+      singer:'',
+      album:"",
+      lyric:'',
+      tilte:'',
+      image:'',
+      mscurl : 'https://music.163.com/song/media/outer/url?id='+(this.$route.query.id)+'.mp3',
       showAnimate: false,
       is_stop: true,
       current_time_instore: 0,
@@ -101,13 +109,29 @@ export default {
 
   },
   mounted() {
-    this.$refs.audio.src = this.$store.state.currentsong_url
-
+    this.initData()
+    //this.$refs.audio.src = this.$store.state.currentsong_url
+    
 
   },
 
 
   methods: {
+    initData () {
+      //id=(this.$route.query.listid)
+      this.$axios.get('http://127.0.0.1:5000/querysong/'+this.$route.query.id).then(res => {
+        // this.datetime = res.data.listid
+        //console.log(res.data)
+        //let i = 0;
+          console.log(res.data)
+          //this.label = res.data.label
+          this.title=(res.data.title)
+          this.singer=(res.data.singer)
+          this.album=res.data.album
+          this.image=res.data.image
+          this.lyric=res.data.lyric
+    })
+      },
     updateTime() {
       let s = this.$refs.audio.currentTime;//获取当前播放时间
       console.log(s + '=======获取当前播放时间')
@@ -119,7 +143,16 @@ export default {
     },
 
     closeSongDetail() {
-      this.$router.push('/B');
+      //this.$router.push('/B');
+      window.history.go(-1)
+      /*
+            if (window.history.length <= 0) {
+                this.$router.push({path:'/Ge-dan'})
+                return false
+            } else {
+              this.$router.back()
+            }
+        */
     },
 
     playmusic() {

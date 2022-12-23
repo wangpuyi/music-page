@@ -124,8 +124,9 @@
 
             
         openDialog(row) {
-        this.$router.push({path: '/Ge-qujiemian'}),
-        this.$store.commit('changesong_ID',row.currentsong_ID)
+        this.$router.push({path: '/Ge-qujiemian',query: {id:row.songid}})
+        //this.$router.push({path: '/Ge-qujiemian'}),
+        //this.$store.commit('changesong_ID',row.currentsong_ID)
         console.log( (this.$store.state.currentsong_ID))
   }
     
