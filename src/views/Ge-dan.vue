@@ -1,4 +1,5 @@
 <template>
+<div class="center" style="margin: 0 260px 0">
 <div class="SortBoxContainer" style="height:50px;">
   <div class="pop" v-if="showModal">
         <button @click="showModal=false" class="btn">{{ this.$store.state.picked_tag }}</button>
@@ -747,7 +748,7 @@
       >
       </el-pagination>
         
- 
+    </div>
 </template>
  
 <script>
@@ -827,7 +828,7 @@
   box-sizing: border-box;
   /* display: block; */
 
-  height: 1740px;
+  /* height: 1740px; */
   position: relative;
 }
 .listCardItem {
@@ -935,5 +936,15 @@
 .el-pagination.is-background .btn-prev, .el-pagination.is-background .btn-next, .el-pagination.is-background .el-pager li{
   border-radius: 10%;
   background-color: #fff;
+}
+.router-link-active {
+  text-decoration: none;
+  color: #fff;
+  text-align: center;
+}
+a {
+  text-decoration: none;
+  color: #fff;
+  
 }
 </style>

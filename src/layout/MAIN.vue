@@ -14,11 +14,11 @@
   </el-carousel> -->
 <!-- 走马灯 end -->
 
-  <el-row :gutter="20">
-  <el-col :span="6"><div class="grid-content bg-purple"><br/><router-link to='/A' > 个性化推荐 </router-link></div></el-col>
-  <el-col :span="6"><div class="grid-content bg-purple"><br/><router-link to='/Ge-dan' > 歌单 </router-link></div></el-col>
-  <el-col :span="6"><div class="grid-content bg-purple"><br/><router-link to='/C' > 可视化部分 </router-link></div></el-col>
-  <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
+  <el-row :gutter="10" style="background-color:white">
+  <el-col :span="6"><div class="grid-content bg-purple" style="text-align:middle"><router-link to='/A' style="text-align:middle"> 个性化推荐 </router-link></div></el-col>
+  <el-col :span="6"><div class="grid-content bg-purple"><router-link to='/Ge-dan' > 歌单 </router-link></div></el-col>
+  <el-col :span="6"><div class="grid-content bg-purple"><router-link to='/C' > 可视化部分 </router-link></div></el-col>
+  <el-col :span="6"><div class="grid-content bg-purple"><router-link to='/geshou' > 歌手 </router-link></div></el-col>
   </el-row>
 
 
@@ -72,7 +72,7 @@ display: flex;
 align-items: center;
 width: 100%;
 height: 100px;
-background-color:aquamarine ;
+background-color:rgb(255, 255, 255) ;
 z-index: 09;
 margin-bottom: 10px;}
 
@@ -88,7 +88,7 @@ margin-bottom: 10px;}
 }
 
 .el-row {
-    margin-bottom: 20px;
+    margin-bottom:20px;
     &:last-child {
       margin-bottom: 0;
     }
@@ -108,6 +108,9 @@ margin-bottom: 10px;}
   .grid-content {
     border-radius: 4px;
     min-height: 36px;
+    text-decoration-line: none;
+    padding: 15px 0 0 0;
+    margin: 0px;
   }
   .row-bg {
     padding: 10px 0;
@@ -128,5 +131,23 @@ margin-bottom: 10px;}
   .el-carousel__item:nth-child(2n+1) {
     background-color: #d3dce6;
   }
+
+// wpy
+.router-link-active {
+  text-decoration: none;
+  color: #fff;
+  display: inline-block;
+}
+a {
+  text-decoration: none;
+  color: #fff;
+  display: inline-block;
+}
+*{
+  margin:0;
+  padding:0;
+  border:0;
+}
+// wpy end
 </style>
 

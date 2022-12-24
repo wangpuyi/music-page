@@ -303,6 +303,7 @@
   </div> -->
   <!-- 按钮 end -->
 <!-- 图片走马灯 -->
+<div class="center" style="margin: 0 260px 0">
 <div class="carousel" style="width:1000px;" auto>
   <el-carousel :interval="4000" type="card" height="200px">
     <el-carousel-item v-for="img in images" :key="img.id">
@@ -323,6 +324,7 @@
       </router-link>
       </div>
     </div>
+</div>
 <!-- 歌单列表 end-->
 </template>
 
@@ -379,7 +381,7 @@ export default {
   box-sizing: border-box;
   /* display: block; */
 
-  height: 500px;
+  height: 500px  !important;
   position: relative;
 }
 .listCardItem {
@@ -495,5 +497,15 @@ export default {
   top: 300px;
   left:50px;
   z-index: 999;
+}
+.router-link-active {
+  text-decoration: none;
+  color: #fff;
+  text-align: center;
+}
+a {
+  text-decoration: none;
+  color: #fff;
+  
 }
 </style>

@@ -32,16 +32,24 @@ const routes = [
         path:"/Ge-qujiemian",
         component:()=>import('../views/Ge-qujiemian')
     },
-
-    
+    {
+        path: "/So-suo",
+        component: () => import("../views/Sou-suojiemian(Ge-dan)"),
+    },
+    {
+        path: "/Ge-danneibu",
+        component: () => import("../views/Ge-danneibu"),
+    },
+    {
+        path: "/geshou",
+        component: () => import("../views/singer"),
+    },  
 
 ]
 
 const router=createRouter({
     history:createWebHashHistory(),
     routes
-
-
 })
 
 export default router;

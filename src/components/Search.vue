@@ -14,7 +14,7 @@ export default {
   methods:{
     send_search(){
       
-      this.$router.push('/B')
+      this.$router.push('/So-suo')
       
       this.$store.commit('changesong',this.mysonglist)
     
@@ -25,7 +25,7 @@ export default {
 <template>
 <div class="bottom"> 
   <input v-model="mysonglist" >
-  <button @click="send_search "  >搜索</button>
+  <button @click="send_search ">搜索</button>
 </div>
 
   
