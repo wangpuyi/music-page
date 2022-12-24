@@ -44,6 +44,10 @@ const routes = [
         path: "/geshou",
         component: () => import("../views/singer"),
     },  
+      {
+    path: "/Ge-shoujiemian",
+    component: () => import("../views/Ge-shoujiemian"),
+  },
 
 ]
 
