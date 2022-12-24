@@ -2,8 +2,10 @@ from flask import Flask,render_template,request,jsonify
 import pymysql,random
 from flask_cors import CORS
 import json
+import requests
+import re
 
-from elasticsearch7 import Elasticsearch
+from elasticsearch import Elasticsearch
 es = Elasticsearch()
 
 app = Flask(__name__)
@@ -234,6 +236,42 @@ def getTopLists():
     #print(result1)
     #print(len(result1))
     return jsonify(result1)
+
+# wpy
+@app.route("/geci/<string:music_id>",methods=['GET','POST'])
+def lyric(music_id):
+# music_id = input("请输入歌曲的id：")
+#我们这里以周杰伦的“布拉格广场”为例，id=210049
+
+  headers={"User-Agent" : "Mozilla/5.0(Windows NT 10.0; WOW64) AppleWebKit/537.36(KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36 ",
+    "Accept" : "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Accept-Language" : "zh-CN,zh;q=0.9",
+    "Connection" : "keep-alive",
+    "Accept-Charset" : "GB2312,utf-8;q=0.7,*;q=0.7"}
+  url = 'http://music.163.com/api/song/lyric?'+ 'id=' + music_id + '&lv=1&kv=1&tv=-1'
+
+  r = requests.get(url,headers=headers,allow_redirects=False)
+  #allow_redirects设置为重定向的参数
+
+  #用js将获取的歌词源码进行解析
+  json_obj = r.text#.text返回的是unicode 型的数据，需要解析
+  j = json.loads(json_obj)#进行json解析
+  words = j['lrc']['lyric'] #将解析后的歌词存在words变量中
+
+  print(words)
+
+  return jsonify(words)
+
+@app.route("/search",methods=['GET','POST'])
+def hello_list_search():
+     if request.method == 'GET':
+        search = request.args.get('search')
+        #print('label is ' + label)
+        data = queryByListName(str(search))
+        print(data)
+        return jsonify(data)
+    
+# wpy end
 
 if __name__ == '__main__':
     app.run()
