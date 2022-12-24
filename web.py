@@ -5,7 +5,7 @@ import json
 import requests
 import re
 
-from elasticsearch import Elasticsearch
+from elasticsearch7 import Elasticsearch
 es = Elasticsearch()
 
 app = Flask(__name__)
@@ -133,6 +133,13 @@ def queryBySongName(title):
         result.append(i["_source"])
     return result
 
+def queryBySongName0(title):
+    #print('ok')
+    cursor = conn.cursor()
+    cursor.execute('SELECT songid,singer,title FROM songlist WHERE title LIKE %s','%'+title+'%')
+    result = cursor.fetchall()
+    #result = [int(i['listid']) for i in result]
+    return result
 
 # queryBySongName("真的")
 
@@ -185,6 +192,23 @@ def queryByListName(name):
         result.append(i["_source"])
     return result
 
+def queryByListName0(name):
+    #print('ok')
+    cursor = conn.cursor()
+    cursor.execute('SELECT listid,name,label,views,author FROM taglist WHERE name LIKE %s','%'+name+'%')
+    result = cursor.fetchall()
+    #result = [int(i['listid']) for i in result]
+    return result
+
+    
+def queryBySingerName0(name):
+    #print('ok')
+    cursor = conn.cursor()
+    cursor.execute('SELECT name FROM singerlist WHERE name LIKE %s','%'+name+'%')
+    result = cursor.fetchall()
+    #result = [int(i['listid']) for i in result]
+    return result
+
 @app.route("/gedans",methods=['GET','POST'])
 def hello():
     if request.method == 'GET':
@@ -197,9 +221,10 @@ def hello():
 
 @app.route("/list1/<int:id>",methods=['GET','POST'])
 def hellolist1(id):
+    print('ok')
     #id = int(request.args.get('id'))
     data = queryList(id)
-    print(data)
+    #print(data)
     return jsonify(data)
 
 
@@ -261,17 +286,38 @@ def lyric(music_id):
   print(words)
 
   return jsonify(words)
-
+#搜歌单
 @app.route("/search",methods=['GET','POST'])
 def hello_list_search():
-     if request.method == 'GET':
-        search = request.args.get('search')
-        #print('label is ' + label)
-        data = queryByListName(str(search))
-        print(data)
-        return jsonify(data)
+    search = request.args.get('search')
+    if search=='': return jsonify([])
+    #print('label is ' + label)
+    data = queryByListName0(str(search))
+    #print(data)
+    return jsonify(data)
     
 # wpy end
 
+
+#搜歌曲
+@app.route("/searchsong",methods=['GET','POST'])
+def hello_song_search1():
+    search = request.args.get('search')
+    if search=='': return jsonify([])
+    #print('label is ' + label)
+    data = queryBySongName0(str(search))
+    #print(data)
+    return jsonify(data)
+#搜歌手
+@app.route("/searchsinger",methods=['GET','POST'])
+def hello_singer_search1():
+    search = request.args.get('search')
+    if search=='': return jsonify([])
+    #print('label is ' + label)
+    data = queryBySingerName0(str(search))
+    #print(data)
+    return jsonify(data)
+    
+
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)

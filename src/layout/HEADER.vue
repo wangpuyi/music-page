@@ -75,8 +75,8 @@ export default {
     con(){
       var res = document.getElementById('search_song').value
       this.$store.commit('search',res)
-      
-      this.$router.push('/So-suo')
+      //this.$router.push({path:'/So-suo'})
+      this.$router.push({path:'/So-suo',query:{search:this.mysonglist}})
    
     }
 }}
