@@ -77,7 +77,10 @@ export default {
       this.$store.commit('search',res)
       //this.$router.push({path:'/So-suo'})
       this.$router.push({path:'/So-suo',query:{search:this.mysonglist}})
-   
+      this.$store.state.show1=1
+            this.$store.state.show2=0
+            this.$store.state.show3=0
+      this.$store.state.pt=1
     }
 }}
 </script>

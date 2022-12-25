@@ -36,8 +36,9 @@ def getPlayListPlus(label, page, num = 35):
 
 #2.	按歌单id获取歌单信息
 def queryList(listId):
+    conn.ping(reconnect=True)
     cursor = conn.cursor()
-    cursor.execute('SELECT name,author,label,amount, views,description,ids FROM taglist WHERE listid LIKE %s',listId)
+    cursor.execute('SELECT listimage,name,author,label,amount, views,description,ids FROM taglist WHERE listid LIKE %s',listId)
     result = cursor.fetchone()
     ids = result['ids'].split(',')
     #result['ids'] = [int(i) for i in ids]
@@ -45,6 +46,20 @@ def queryList(listId):
     result['SongsData'] = result2
     #cursor.close()
     return result
+
+#2.	按歌手name获取歌手信息
+def querySinger(name):
+    conn.ping(reconnect=True)
+    cursor = conn.cursor()
+    cursor.execute('SELECT name,summary,songids,image FROM singerlist WHERE name =  %s',name)
+    result = cursor.fetchone()
+    ids = result['songids'].split(',')
+    #result['ids'] = [int(i) for i in ids]
+    result2 = querySongs(ids)
+    result['SongsData'] = result2
+    #cursor.close()
+    return result
+
 
 #3.	按歌曲id获取歌曲信息
 def querySong(songId):
@@ -134,9 +149,9 @@ def queryBySongName(title):
     return result
 
 def queryBySongName0(title):
-    #print('ok')
+    conn.ping(reconnect=True)
     cursor = conn.cursor()
-    cursor.execute('SELECT songid,singer,title FROM songlist WHERE title LIKE %s','%'+title+'%')
+    cursor.execute('SELECT songid,singer,title,album FROM songlist WHERE title LIKE %s','%'+title+'%')
     result = cursor.fetchall()
     #result = [int(i['listid']) for i in result]
     return result
@@ -193,7 +208,7 @@ def queryByListName(name):
     return result
 
 def queryByListName0(name):
-    #print('ok')
+    conn.ping(reconnect=True)
     cursor = conn.cursor()
     cursor.execute('SELECT listid,name,label,views,author FROM taglist WHERE name LIKE %s','%'+name+'%')
     result = cursor.fetchall()
@@ -202,9 +217,9 @@ def queryByListName0(name):
 
     
 def queryBySingerName0(name):
-    #print('ok')
+    conn.ping(reconnect=True)
     cursor = conn.cursor()
-    cursor.execute('SELECT name FROM singerlist WHERE name LIKE %s','%'+name+'%')
+    cursor.execute('SELECT name,image FROM singerlist WHERE name LIKE %s','%'+name+'%')
     result = cursor.fetchall()
     #result = [int(i['listid']) for i in result]
     return result
@@ -224,6 +239,14 @@ def hellolist1(id):
     print('ok')
     #id = int(request.args.get('id'))
     data = queryList(id)
+    #print(data)
+    return jsonify(data)
+
+@app.route("/singer/<name>",methods=['GET','POST'])
+def hellosinger1(name):
+    print('ok')
+    #id = int(request.args.get('id'))
+    data = querySinger(name)
     #print(data)
     return jsonify(data)
 
@@ -254,6 +277,7 @@ def hellodesong(id):
 
 @app.route("/zhuye",methods=['GET','POST'])
 def getTopLists():
+    conn.ping(reconnect=True)
     cursor = conn.cursor()
     cursor.execute('select name,listid,listimage from taglist order by views desc limit 100')
     result1 = cursor.fetchall()
@@ -261,6 +285,18 @@ def getTopLists():
     #print(result1)
     #print(len(result1))
     return jsonify(result1)
+
+@app.route("/geshou",methods=['GET','POST'])
+def getTopSingers():
+    conn.ping(reconnect=True)
+    cursor = conn.cursor()
+    cursor.execute('select name,image from singerlist where image<>"" limit 100')
+    result1 = cursor.fetchall()
+    result1=random.sample(result1,20)
+    #print(result1)
+    #print(len(result1))
+    return jsonify(result1)
+
 
 # wpy
 @app.route("/geci/<string:music_id>",methods=['GET','POST'])

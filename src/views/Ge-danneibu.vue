@@ -7,34 +7,31 @@
   
 <div>
   <h1>{{ name }}</h1>
-<div class="wrapper">
+  <div class="wrapper">
     <div class="f1"><el-card class="box-card">
-  <div  class="text item">
-    创建者：
-  </div>
-  <div  class="text item">
-    标签：
-  </div>
-  <div  class="text item">
-    播放量：
-  </div>
-  <div  class="text item">
-    简介：
-  </div>
+      <el-image
+      style="width: 350px; height: 350px"
+      :src="url"
+      :fit="fit">
+ 
+
+ </el-image>
 </el-card></div>
     <div class="f2"><el-card class="box-card1">
-  <div  class="text item">
-    {{author}}
+      <div  class="text item">
+    创建者：{{ this.author }}
   </div>
   <div  class="text item">
-    {{label}}
+    播放量：{{ views }}
   </div>
   <div  class="text item">
-    {{views}}
+    标签：{{ label }}
   </div>
+
   <div  class="text item">
-    {{des}}
+    {{ des }}
   </div>
+
 </el-card></div>
 </div></div>
 
@@ -81,6 +78,7 @@
             songids:'',
             views:'',
             des:'',
+            url:'',
             label:''
                 };
             },
@@ -105,7 +103,7 @@
           this.SongsData = res.data.SongsData
           this.views=(res.data.views)
           this.des=(res.data.description)
-
+          this.url = res.data.listimage
           
       })
       

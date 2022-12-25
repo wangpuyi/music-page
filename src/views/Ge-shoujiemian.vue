@@ -1,7 +1,7 @@
 <template>
-
+ <meta name="referrer" content="no-referrer" />
 <div>
-  <h1>{{ name }}</h1>
+  <h1>{{ this.$route.query.name }}</h1>
 <div class="wrapper">
     <div class="f1"><el-card class="box-card">
       <el-image
@@ -14,7 +14,7 @@
 </el-card></div>
     <div class="f2"><el-card class="box-card1">
       <div  class="text item">
-    歌手：{{ name }}
+    歌手：{{ this.$route.query.name }}
   </div>
 
   <div  class="text item">
@@ -64,9 +64,8 @@
         total: 20, // 总条数
         pageSize: 5, // 每页的数据条数
         name: "bird",
-        des:"很懒sddddddddddddddddddsssssssssssssssssss",
-        url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'
-      };
+        des:"Loading...",
+        url:  'https://tupian.qqw21.com/article/UploadPic/2020-4/20204717444472684.jpg'      };
     },
 
     mounted() {
@@ -77,19 +76,20 @@
       initData() {
         //id=(this.$route.query.listid)
         this.$axios
-          .get("http://127.0.0.1:5000/list1/" + this.$route.query.listid)
+          .get("http://127.0.0.1:5000/singer/" + this.$route.query.name)
           .then((res) => {
             // this.datetime = res.data.listid
             //console.log(res.data)
             //let i = 0;
-            console.log(res.data);
+            console.log(res.data)
+            if (res.data.image != '') this.url = res.data.image ;
             this.label = res.data.label;
-            this.name = res.data.name;
-            this.author = res.data.author;
+            //this.name = res.data.name;
+            //this.author = res.data.author;
             //const payload = {'ids':res.data.ids}
             this.SongsData = res.data.SongsData;
-            this.views = res.data.views;
-            this.des = res.data.description;
+            //this.views = res.data.views;
+            this.des = res.data.summary;
           });
       //把这里改成歌手的相关内容即可
         },

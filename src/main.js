@@ -20,6 +20,19 @@ const store = createStore({
       currentsong_ID: 0,
       songlist: [],
       search_res: "",
+
+      //12-25 Sou-suojiemian的SongsData改为全局变量
+      SongsData: [
+        {
+          listid: "2626492658",
+          name: "粤语情歌世界最深情的歌V",
+          image:'',
+        },
+      ],
+      show1:1,
+      show2:0,
+      show3:0,
+      pt:0,
     };
   },
   mutations: {
@@ -42,10 +55,6 @@ const store = createStore({
     },
   },
 });
-const app = createApp(App)
-  .use(Vuex)
-  .use(ElementPlus)
-  .use(router)
-  .use(store);
+const app = createApp(App).use(Vuex).use(ElementPlus).use(router).use(store);
 app.config.globalProperties.$axios = axios;
 app.mount("#app");

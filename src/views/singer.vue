@@ -1,4 +1,5 @@
 <template>
+   <meta name="referrer" content="no-referrer" />
   <div class="center" style="margin: 0 260px 0">
   <!-- <div class="SortBoxContainer" style="height:50px;">
     <div class="pop" v-if="showModal">
@@ -719,11 +720,11 @@
   
   </div> -->
   <br>
-  
+  <h1>时下最热</h1>
   <!-- 歌单列表 -->
   <div class = 'listCard' style="width:980px;" infinite-scroll-disabled="true" infinite-scroll-distance="300">
-        <div v-for="o in 25" :key='o' class = 'listCardItem'>
-          <router-link :to="{path: '/B', query: {listid: ids[o-1]}}">
+        <div v-for="o in 20" :key='o' class = 'listCardItem'>
+          <router-link :to="{path: '/Ge-shoujiemian', query: {name: name[o-1]}}">
   
           <div class="image">
             <img class="img" :src='ListImage[o-1]' />
@@ -736,7 +737,7 @@
       </div>
   
   <!-- 歌单列表 end -->
-        <!-- 分页器 -->
+        <!-- 分页器
         <el-pagination 
         background="true"
         @size-change="handleSizeChange" 
@@ -747,7 +748,7 @@
         layout=" prev, pager, next" 
         >
         </el-pagination>
-          
+           -->
       </div>
   </template>
    
@@ -784,25 +785,22 @@
                     this.initData()
                   },
         initData () {
-          // const payload = {
-          //   'label' : this.$store.state.picked_tag,
-          //   'page': this.currentPage
-          // }
-          // this.$axios.get('http://127.0.0.1:5000/gedans',{params:payload}).then(res => {
-          // // this.datetime = res.data.listid
-          // console.log(res.data)
-          // this.total = 35*res.data[0].pages
-          // let i = 1;
-          // this.name = []
-          // this.ids = []
-          // this.ListImage = []
-          // for(; i <= 35; i++){
-          //   console.log(res.data[i])
-          //   this.name.push(res.data[i].name)
-          //   this.ListImage.push(res.data[i].listimage)
-          //   this.ids.push(res.data[i].listid)
-          // }     
-          // })
+
+           this.$axios.get('http://127.0.0.1:5000/geshou').then(res => {
+            this.datetime = res.data.listid
+           console.log(res.data)
+           this.total = 20
+           let i = 0;
+           this.name = []
+           //this.ids = []
+           this.ListImage = []
+           for(; i < this.total; i++){
+             console.log(res.data[i])
+             this.name.push(res.data[i].name)
+             this.ListImage.push(res.data[i].image)
+            //this.ids.push(res.data[i].listid)
+           }     
+           })
         }
       },
       mounted () {

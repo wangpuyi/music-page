@@ -7,7 +7,7 @@
     </h2>
 
     <h3>
-        共找到{{ SongsData.length}}条相关内容
+        共找到{{ this.$store.state.SongsData.length}}条相关内容
     </h3>
             
 
@@ -19,13 +19,17 @@
 
     <div v-show="this.$store.state.show1 == 1">
         <!-- 表格 -->
-        <el-table :data="SongsData.slice((currentPage-1)*pageSize,currentPage*pageSize)" style="width: 100%" @row-click="openDialog">
+        <el-table :data="this.$store.state.SongsData.slice((currentPage-1)*pageSize,currentPage*pageSize)" style="width: 100%" @row-click="openDialog">
            
    
            
             <el-table-column prop="name" label="歌单名称" width="300" >
             </el-table-column>
-            <el-table-column prop="listid" label="歌单编号" width="300" >
+            <el-table-column prop="author" label="创建者" width="300" >
+            </el-table-column>
+            <el-table-column prop="views" label="播放量" width="300" >
+            </el-table-column>
+            <el-table-column prop="label" label="标签" width="300" >
             </el-table-column>
         </el-table>
         <div class="block" style="margin-top:15px;">
@@ -39,13 +43,14 @@
         </div>
         </div>
       <div v-show="this.$store.state.show2 == 1">
-        <el-table :data="SongsData.slice((currentPage-1)*pageSize,currentPage*pageSize)" style="width: 100%" @row-click="openDialog1">
-           
-   
+        <!---->
+        <el-table :data="this.$store.state.SongsData.slice((currentPage-1)*pageSize,currentPage*pageSize)" style="width: 100%" @row-click="openDialog1">
            
            <el-table-column prop="title" label="歌曲名称" width="300" >
            </el-table-column>
-           <el-table-column prop="songid" label="歌曲编号" width="300" >
+           <el-table-column prop="singer" label="歌手" width="300" >
+           </el-table-column>
+           <el-table-column prop="album" label="专辑" width="300" >
            </el-table-column>
           </el-table>
         <!-- 分页器 -->
@@ -61,18 +66,18 @@
 
         </div>
       <div v-show="this.$store.state.show3 == 1">
-        <el-table :data="SongsData.slice((currentPage-1)*pageSize,currentPage*pageSize)" style="width: 100%" @row-click="openDialog2">
-           
-   
+
+        <el-table :data="this.$store.state.SongsData.slice((currentPage-1)*pageSize,currentPage*pageSize)" style="width: 100%" @row-click="openDialog2">
            
            <el-table-column prop="name" label="歌手名称" width="300" >
            </el-table-column>
-           <el-table-column prop="summary" label="歌手编号" width="300" >
-           </el-table-column>
+
            
        </el-table>
 
-       
+
+
+
 
         <!-- 分页器 -->
         <div class="block" style="margin-top:15px;">
@@ -95,15 +100,11 @@
                     
    
                   SongsData:[
-                    {
-                        "listid":"2626492658"
-                        ,
-                        "name":"粤语情歌世界最深情的歌V"
-                    }
+                   
                   ],
                     currentPage: 1, // 当前页码
                     total: 20, // 总条数
-                    pageSize: 5, // 每页的数据条数
+                    pageSize: 10, // 每页的数据条数
                     name:'',
             author:'',
             songids:'',
@@ -114,13 +115,16 @@
             },
 
             mounted(){
+               console.log('mounted')
+                
                 this.initData()
-
+              
             },
             
             watch: {
 		'$route' (to, from) {
-			this.initData(); // 这是我ajax获取用户信息的方法
+      this.$store.state.pt=1
+     this.initData()
 		}},
 
 
@@ -134,10 +138,15 @@
       this.$axios.get('http://127.0.0.1:5000/search',{params:payload}).then(res => {    
             console.log(res.data)
             this.SongsData = res.data
-
+            if (this.$store.state.pt == 1)
+            {this.$store.state.SongsData = res.data
+              this.$store.state.pt = 0
+            }
       })
       
     } ,
+    
+
                 //每页条数改变时触发 选择一页显示多少行
                 handleSizeChange(val) {
                     console.log(`每页 ${val} 条`);
@@ -164,8 +173,8 @@
         //this.$store.commit('changesong_ID',row.currentsong_ID)
         console.log( (this.$store.state.currentsong_ID))
   },openDialog2(row) {
-        this.$router.push({path: '/Ge-danneibu',query: {listid:row.listid}})
-        console.log(row.listid)
+        this.$router.push({path: '/Ge-shoujiemian',query: {name:row.name}})
+        console.log(row.name)
         //this.$router.push({path: '/Ge-qujiemian'}),
         //this.$store.commit('changesong_ID',row.currentsong_ID)
         console.log( (this.$store.state.currentsong_ID))
@@ -177,6 +186,7 @@
       this.$axios.get('http://127.0.0.1:5000/searchsong',{params:payload}).then(res => {    
             console.log(res.data)
             this.SongsData = res.data
+            this.$store.state.SongsData=this.SongsData
             this.$store.state.show1=0
             this.$store.state.show2=1
             this.$store.state.show3=0
@@ -191,6 +201,7 @@
       this.$axios.get('http://127.0.0.1:5000/searchsinger',{params:payload}).then(res => {    
             console.log(res.data)
             this.SongsData = res.data
+            this.$store.state.SongsData=this.SongsData
             this.$store.state.show1=0
             this.$store.state.show2=0
             this.$store.state.show3=1
@@ -204,6 +215,7 @@
       this.$axios.get('http://127.0.0.1:5000/search',{params:payload}).then(res => {    
             console.log(res.data)
             this.SongsData = res.data
+            this.$store.state.SongsData=this.SongsData
             this.$store.state.show1=1
             this.$store.state.show2=0
         this.$store.state.show3=0
@@ -251,4 +263,5 @@
     border: 1px solid #F00;
     float: left;
 }
+
 </style>
