@@ -12,9 +12,9 @@
             
 
     <div class="btn">
-               <button @click="con0" style="width:10%; height:10%;back">歌单<i class="icon-sprite"></i></button>
-                <button @click="con1" style="width:10%; height:10%;back">歌曲<i class="icon-sprite"></i></button>
-                <button @click="con2" style="width:10%; height:10%;back">歌手<i class="icon-sprite"></i></button>
+               <el-button  :type='type1' @click="con0" style="width:10%; height:10%;">歌单<i class="icon-sprite"></i></el-button>
+                <el-button :type='type2' @click="con1" style="width:10%; height:10%;back">歌曲<i class="icon-sprite"></i></el-button>
+                <el-button :type='type3' @click="con2" style="width:10%; height:10%;back">歌手<i class="icon-sprite"></i></el-button>
       </div>
 
     <div v-show="this.$store.state.show1 == 1">
@@ -97,7 +97,9 @@
         export default {
             data() {
                 return {
-                    
+                    type1: 'primary',
+                    type2: '',
+                    type3: '',
    
                   SongsData:[
                    
@@ -180,6 +182,9 @@
         console.log( (this.$store.state.currentsong_ID))
   },
   con1(){
+    this.type1 = ''
+    this.type2 = 'primary'
+    this.type3 = ''
     const payload = {
           'search' :this.$store.state.search_res
           }
@@ -195,6 +200,9 @@
     
   },
   con2(){
+    this.type1 = ''
+    this.type2 = ''
+    this.type3 = 'primary'
     const payload = {
           'search' :this.$store.state.search_res
           }
@@ -209,6 +217,9 @@
     
     
   },con0(){
+    this.type1 = 'primary'
+    this.type2 = ''
+    this.type3 = ''
     const payload = {
           'search' :this.$store.state.search_res
           }
@@ -228,6 +239,9 @@
 
 
 <style>
+.button{
+  background-color: azure;
+}
   .text {
     font-size: 14px;
   }
