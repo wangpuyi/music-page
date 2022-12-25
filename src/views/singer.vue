@@ -727,7 +727,7 @@
           <router-link :to="{path: '/Ge-shoujiemian', query: {name: name[o-1]}}">
   
           <div class="image">
-            <img class="img" :src='ListImage[o-1]' />
+            <img class="img" :src='ListImage[o-1]' height='185' />
           </div>
           <div class="title">{{name[o-1]}}</div>
         </router-link>
