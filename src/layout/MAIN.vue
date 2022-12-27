@@ -17,8 +17,8 @@
   <el-row :gutter="10" style="background-color:white">
   <el-col :span="6"><div class="grid-content bg-purple" style="text-align:middle"><router-link to='/A' style="text-align:middle"> 个性化推荐 </router-link></div></el-col>
   <el-col :span="6"><div class="grid-content bg-purple"><router-link to='/Ge-dan' > 歌单 </router-link></div></el-col>
-  <el-col :span="6"><div class="grid-content bg-purple"><router-link to='/C' > 可视化部分 </router-link></div></el-col>
   <el-col :span="6"><div class="grid-content bg-purple"><router-link to='/geshou' > 歌手 </router-link></div></el-col>
+  <el-col :span="6"><div class="grid-content bg-purple"><router-link to='/C' > 可视化部分 </router-link></div></el-col>
   </el-row>
 
 
