@@ -307,7 +307,10 @@
 <div class="carousel" style="width:1000px;" auto>
   <el-carousel :interval="4000" type="card" height="200px">
     <el-carousel-item v-for="img in images" :key="img.id">
+      <router-link :to="{path: '/B',  query: {listid: img.listid}}">
+
       <div class="rowing_image"><el-image style="width: 100%; height: 200px" :src="img.Image" ></el-image></div>
+    </router-link>
     </el-carousel-item>
   </el-carousel>
 </div>
@@ -335,12 +338,12 @@ export default {
     return {
       // showModal: false,
       // pick_tag: "华语",
-      images: [{id: 1, Image: 'http://p1.music.126.net/es5iS_FTfgKBngEGpswzUw==/109951168153707267.jpg '},
-        {id: 2, Image: 'http://p1.music.126.net/XkhUtVDdGLcg5KpXa_Vw-w==/109951168153726125.jpg'}, 
-        {id: 3, Image: 'http://p1.music.126.net/e1eNRZLZEgMzG0GxPFtTiA==/109951168153738247.jpg'},
-        {id: 4, Image: 'http://p1.music.126.net/Qp-6Lgrkg8KkaBeaSjgq4g==/109951168153713033.jpg'},
-        {id: 5, Image: 'http://p1.music.126.net/JVeTK-MnkeLj3b3F8u49Pw==/109951168153726257.jpg'},
-        {id: 6, Image: 'http://p1.music.126.net/jLT0ETZuxg17L1NnVbwnJA==/109951168153727929.jpg'}],
+      images: [{listid:133,id: 1, Image: 'http://p1.music.126.net/es5iS_FTfgKBngEGpswzUw==/109951168153707267.jpg '},
+        {listid:133,id: 2, Image: 'http://p1.music.126.net/XkhUtVDdGLcg5KpXa_Vw-w==/109951168153726125.jpg'}, 
+        {listid:133,id: 3, Image: 'http://p1.music.126.net/e1eNRZLZEgMzG0GxPFtTiA==/109951168153738247.jpg'},
+        {listid:133,id: 4, Image: 'http://p1.music.126.net/Qp-6Lgrkg8KkaBeaSjgq4g==/109951168153713033.jpg'},
+        {listid:133,id: 5, Image: 'http://p1.music.126.net/JVeTK-MnkeLj3b3F8u49Pw==/109951168153726257.jpg'},
+        {listid:133,id: 6, Image: 'http://p1.music.126.net/jLT0ETZuxg17L1NnVbwnJA==/109951168153727929.jpg'}],
       ListImage: [],
       name : [],
       ids : []
