@@ -7,6 +7,8 @@ npm install
 npm install echarts@4.9.0 --force
 
 npm install @element-plus/icons-vue  --force
+
+npm install echarts-wordcloud@1 --force
 ```
 
 ### Compiles and hot-reloads for development
