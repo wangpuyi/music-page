@@ -338,12 +338,12 @@ export default {
     return {
       // showModal: false,
       // pick_tag: "华语",
-      images: [{tourl:{path: '/B',  query: {listid: 133}},id: 1, Image: 'http://p1.music.126.net/es5iS_FTfgKBngEGpswzUw==/109951168153707267.jpg '},
-        {tourl:{path: '/B',  query: {listid: 133}},id: 2, Image: 'http://p1.music.126.net/XkhUtVDdGLcg5KpXa_Vw-w==/109951168153726125.jpg'}, 
-        {tourl:{path: '/Ge-qujiemian',  query: {id: 133}},id: 3, Image: 'http://p1.music.126.net/e1eNRZLZEgMzG0GxPFtTiA==/109951168153738247.jpg'},
-        {tourl:{path: '/B',  query: {listid: 133}},id: 4, Image: 'http://p1.music.126.net/Qp-6Lgrkg8KkaBeaSjgq4g==/109951168153713033.jpg'},
-        {tourl:{path: '/B',  query: {listid: 133}},id: 5, Image: 'http://p1.music.126.net/JVeTK-MnkeLj3b3F8u49Pw==/109951168153726257.jpg'},
-        {tourl:{path: '/B',  query: {listid: 133}},id: 6, Image: 'http://p1.music.126.net/jLT0ETZuxg17L1NnVbwnJA==/109951168153727929.jpg'}],
+      images: [{tourl:{path: '/Ge-qujiemian',  query: {id: 2007188824}},id: 1, Image: 'http://p1.music.126.net/es5iS_FTfgKBngEGpswzUw==/109951168153707267.jpg '},
+        {tourl:{path: '/Ge-qujiemian',  query: {id: 2006534640}},id: 2, Image: 'http://p1.music.126.net/wi3vdikHXlPeBV1IyGc6tQ==/109951168182758245.jpg'}, 
+        {tourl:{path: '/Ge-qujiemian',  query: {id: 2009750812}},id: 3, Image: 'http://p1.music.126.net/wu6mbkghClZQSqBfs_eETw==/109951168182720905.jpg'},
+        {tourl:{path: '/Ge-qujiemian',  query: {id: 2008721563}},id: 4, Image: 'http://p1.music.126.net/Itps6s2qsB0v4T5Mu88w5w==/109951168182743597.jpg'},
+        {tourl:{path: '/Ge-qujiemian',  query: {id: 2006950659}},id: 5, Image: 'http://p1.music.126.net/JVeTK-MnkeLj3b3F8u49Pw==/109951168153726257.jpg'},
+        {tourl:{path: '/Ge-qujiemian',  query: {id: 1453740239}},id: 6, Image: 'http://p1.music.126.net/jLT0ETZuxg17L1NnVbwnJA==/109951168153727929.jpg'}],
       ListImage: [],
       name : [],
       ids : []
