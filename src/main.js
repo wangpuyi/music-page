@@ -8,6 +8,9 @@ import Vuex from "vuex";
 import { createStore } from "vuex";
 import axios from "axios";
 
+//icon
+import * as ElementPlusIconsVue from '@element-plus/icons-vue'
+
 const store = createStore({
   state() {
     return {
@@ -26,16 +29,43 @@ const store = createStore({
         {
           listid: "2626492658",
           name: "粤语情歌世界最深情的歌V",
-          image:'',
+          image: "",
         },
       ],
-      show1:1,
-      show2:0,
-      show3:0,
-      pt:0,
+      show1: 1,
+      show2: 0,
+      show3: 0,
+      pt: 0,
+
+      gedanneibu_label: "",
+      gedanneibu_name: "",
+      gedanneibu_author: "",
+      //const payload = {'ids':res.data.ids}
+      gedanneibu_SongsData: [],
+      gedanneibu_views: "",
+      gedanneibu_des: "",
+      gedanneibu_url: "https://tupian.qqw21.com/article/UploadPic/2020-4/20204717444472684.jpg",
+
+      Same_gedan: false,
     };
   },
   mutations: {
+    Leave_gedan(state) {
+      state.Same_gedan = false;
+
+      state.gedanneibu_label = "";
+      state.gedanneibu_name = "";
+      state.gedanneibu_author = "";
+
+      state.gedanneibu_SongsData = [];
+      state.gedanneibu_views = "";
+      state.gedanneibu_des = "";
+      state.gedanneibu_url = "";
+      state.gedanneibu_id = "";
+    },
+    Same_gedan(state) {
+      state.Same_gedan = true;
+    },
     increment(state) {
       state.count++;
     },
@@ -53,8 +83,21 @@ const store = createStore({
       state.search_res = data1;
       console.log(state.search_res);
     },
+    Ge_danneibu_cache(state, data) {
+      state.gedanneibu_label = data.label;
+      state.gedanneibu_name = data.name;
+      state.gedanneibu_author = data.author;
+      state.gedanneibu_SongsData = data.SongsData;
+      state.gedanneibu_views = data.views;
+      state.gedanneibu_des = data.des;
+      state.gedanneibu_url = data.url;
+      state.gedanneibu_id = data.id;
+    },
   },
 });
 const app = createApp(App).use(Vuex).use(ElementPlus).use(router).use(store);
+for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+  app.component(key, component)
+}
 app.config.globalProperties.$axios = axios;
 app.mount("#app");

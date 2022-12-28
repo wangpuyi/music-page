@@ -1,12 +1,9 @@
 <template>
 
   <div class="playing-song-detail" ref="playingSongDetail">
-    <button class="icon-down-arrow" @click="closeSongDetail"> 返回歌单</button>
-    <!-- <br><br><br><br> -->
-    <!-- {{ this.image }} -->
   
-    <el-container style="height: 1000px; border: 1px solid #eee">
-          
+    <el-container style="top:0%; height:1000px;background:-webkit-linear-gradient(top,hsla(0,0%,59%,.15),hsla(0,0%,59%,0),white) ;">
+      <el-icon size="35px" color="black" class="icon-down-arrow" @click="closeSongDetail"> <Back /> </el-icon>
       <div @click="playmusic" :class="{ 'rotate360': showAnimate }" class="icon-iconfontshuaxin">
         <img  class="tupian" :src="image" >
       </div>
@@ -14,9 +11,9 @@
           <h2>{{this.title}}</h2>
           <h3>{{this.singer}}</h3>
         </div>
-          <ul class="lyric" ref="lyric">
-            <li :class="{each:true, choose: (index==lyricIndex)}" v-for="(item, i) in lyricsObjArr"  :key="item.uid"
-              :data-index='i' >{{ item.lyric }}</li>
+          <ul class="lyric" ref="lyricUl">
+            <li :class="{each:true, choose: (index==this.lyricIndex)}" v-for="(item, index) in lyricsObjArr"  :key="item.uid"
+              :data-index='index' ref="lyric">{{ item.lyric }}</li>
           </ul>
 
     <!-- <ul class="lyric" v-show="isShowMusicList" ref="lyric">
@@ -39,9 +36,8 @@
 
 
 <script>
+
 export default {
-
-
 data() {
   return {
     singer:'',
@@ -53,7 +49,8 @@ data() {
     showAnimate: false,
     is_stop: true,
     current_time_instore: 0,
-    lyricsObjArr: []
+    lyricsObjArr: [],
+    lyricIndex : 0
 
 
   }
@@ -63,28 +60,35 @@ watch: {
   // 匹配歌词
   // 匹配歌词
   current_time_instore() {
+    
+    // for (let i = 0; i < this.lyricsObjArr.length; i++) {
+    //   if (this.current_time_instore > (parseInt(this.lyricsObjArr[i].time))) {
+    //     console.log('here1')
+    //     const index = this.$refs.lyricUl.dataset.index
+    //     // const index = '100264545'
+    //     console.log('here2 : '+ index)
+    //     if (i === parseInt(index)) {
+    //       console.log(i)
+    //       this.lyricIndex = i
+    //       this.$refs.lyricUl.style.transform = `translateY(${20 - (5 * (i + 1))}px)`
+    //     }
+    //   }
+    // }
     for (let i = 0; i < this.lyricsObjArr.length; i++) {
       if (this.current_time_instore > (parseInt(this.lyricsObjArr[i].time))) {
+        console.log('here1')
         const index = this.$refs.lyric[i].dataset.index
+        // const index = '100264545'
+        console.log('here2 : '+ index)
         if (i === parseInt(index)) {
+          console.log(i)
           this.lyricIndex = i
-          this.$refs.lyricUL.style.transform = `translateY(${20 - (5 * (i + 1))}px)`
+          // this.$refs.lyric[i].style.transform = `translateY(${20 - (5 * (i + 1))}px)`
+          // this.$refs.lyric[i].scrollTop = 30 * (i - 5);
+          this.$refs.lyricUl.scrollTop = 30 * (i - 6);
         }
       }
     }
-    // let i = 0
-    //         // 循环歌词对象
-    //         for (let key in this.lyricsObjArr) {
-    //         // key表示歌词对象中的时间，如果key等于歌曲进度value，改变当前歌词进度		lyricIndex
-    //             if (+key == this.value) {
-    //                 this.lyricIndex = i;
-    //                 // 当歌词进度大于5，即播放到了第5句歌词，开始滚动
-    //                 if (i > 5) {
-    //                     this.$refs.lyric.scrollTop = 30 * (i - 5);
-    //                 }
-    //             }
-    //             i++;
-    //         }
   }
 
 },
@@ -134,6 +138,7 @@ methods: {
             this.lyricsObjArr.push(obj)
           }
         })
+        console.log(this.lyricsObjArr)
     })
   },
   formatLyricTime (time) { // 格式化歌词的时间 转换成 sss:ms
@@ -156,6 +161,7 @@ methods: {
     this.current_time_instore = parseFloat(s)
 
   },
+
   play() {
     this.showAnimate = false
   },
@@ -189,8 +195,6 @@ methods: {
     audio.duration;//获取总播放时间
     audio.currentTime;//获取播放进度
     console.log(audio.currentTime);//控制台显示
-
-
   }
 }
 }
@@ -204,18 +208,19 @@ methods: {
         position: absolute;
         margin-top: 13%;
         margin-left: 40%;
-        background-color: rgb(255, 255, 255);
+        // background-color: rgb(255, 255, 255);
+        background-color:7a;
         // 滚动条
         overflow: auto;
         color: rgb(0, 0, 0);
         font-size: 10px;
         font-weight: normal;
         padding: 5px 10px;
-        border: 1px solid rgb(255, 255, 255);
+        // border: 1px solid rgb(255, 255, 255);
         border-left: none;
+        
         .each {
         height: 30px;
-        // border: 1px solid #000;
         line-height: 30px;
         text-align: center;
         color: #000;
@@ -233,14 +238,17 @@ methods: {
         }
         // 滑块部分
         &::-webkit-scrollbar-thumb {
-            background-color: rgb(218, 218, 218);
+            background-color: rgb(185, 185, 185);
         }
         // 轨道部分
-        &::-webkit-scrollbar-track {
-            background-color: rgb(255, 255, 255);
-        }
+        // &::-webkit-scrollbar-track {
+        //     background-color: rgb(255, 255, 255);
+        // }
     }
 
+::marker {
+  content: none;
+}
 // wpy end
 .play-tab {
 position: relative;
@@ -261,13 +269,14 @@ overflow-y: scroll;
 
 // 关闭页面按钮
 .icon-down-arrow {
-  position: fixed;
-  top: 10px;
+  position: relative;
+  top: 30px;
   left: 20px;
   font-size: 16px;
   font-weight: 700;
-  background-color: rgb(237, 240, 27);
-  color: rgb(0, 0, 0);
+  cursor: pointer;
+  // background-color: rgb(237, 240, 27);
+  // color: rgb(0, 0, 0);
 }
 
 .disc {
@@ -298,7 +307,7 @@ overflow-y: scroll;
 
 .icon-iconfontshuaxin {
   position: relative;
-  margin-top: 10%;
+  margin-top: 15%;
   margin-left: 10%;
   width: 300px;
   height: 300px;

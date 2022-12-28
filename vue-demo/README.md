@@ -3,6 +3,10 @@
 ## Project setup
 ```
 npm install
+
+npm install echarts@4.9.0 --force
+
+npm install @element-plus/icons-vue  --force
 ```
 
 ### Compiles and hot-reloads for development
